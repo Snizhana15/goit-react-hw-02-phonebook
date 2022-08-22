@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useParams, useNavigate } from 'react-router';
+import { Outlet, useParams, useNavigate, useLocation } from 'react-router';
 import { getMoviesById } from '../../services/Api';
 import {
   CardContainer,
@@ -17,6 +17,7 @@ const MovieDetails = () => {
   const { movieId } = useParams();
   const [info, setInfo] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const getMovie = async () => {
@@ -32,7 +33,9 @@ const MovieDetails = () => {
 
   return (
     <>
-      <Button onClick={() => navigate('/')}>Go Back</Button>
+      <Button onClick={() => navigate(location?.state?.from ?? '/')}>
+        Go Back
+      </Button>
       {info && (
         <CardContainer>
           <ImageContainer>
