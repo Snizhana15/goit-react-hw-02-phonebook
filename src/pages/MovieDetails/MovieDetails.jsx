@@ -26,10 +26,12 @@ const MovieDetails = () => {
         setInfo(res);
       } catch (error) {
         console.log(error.message);
+        alert('Sorry, this link failed');
+        navigate('/', { replace: true });
       }
     };
     getMovie();
-  }, [movieId]);
+  }, [movieId, navigate]);
 
   return (
     <>
